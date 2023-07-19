@@ -1,0 +1,38 @@
+.header {
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* position: fixed; */
+  background-color: white;
+  width: 100%;
+  padding-bottom: 0.5vmax;
+  box-shadow: 3px 3px 21px rgb(189, 189, 217);
+}
+
+.header > a {
+  width: 2vmax;
+  height: 2vmax;
+  margin: 1vmax 4vmax;
+}
+.header > a > svg {
+  font-size: 2.5vmax;
+  transition: all 0.5s;
+  color: #ca9bf7;
+}
+
+.header > a > svg:hover {
+  color: #663399;
+  transform: scale(1.2);
+}
+
+@media screen and (max-width: 700px) {
+  .header > a {
+    width: 4vw;
+    height: 4vw;
+    margin: 2vw 8vw;
+  }
+  .header > a > svg {
+    font-size: 5vw;
+  }
+}
