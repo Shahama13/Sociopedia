@@ -29,13 +29,23 @@ Responsive Design: The website is optimized for different screen sizes and devic
 # Environment Variables
 
 PORT
+
 MONGO_URL
+
 JWT_SECRET
+
 SMPT_HOST
+
 SMPT_PORT
+
 SMPT_SERVICE
+
 SMPT_MAIL
+
 SMPT_PASSWORD
+
 CLOUDINARY_NAME
+
 CLOUDINARY_API_KEY
+
 CLOUDINARY_API_SECRET
