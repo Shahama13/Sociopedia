@@ -35,6 +35,7 @@
 .searchResults {
   background-color: white;
   height: -moz-fit-content;
+  overflow-y: scroll;
   height: fit-content;
   width: 50%;
   border-radius: 30px;
