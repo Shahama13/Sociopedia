@@ -94,12 +94,12 @@ const UserProfile = () => {
   const followHandler = async () => {
     setFollowing(!following);
     await dispatch(followUnfollowUser(user._id));
-   await dispatch(getUserPost(params.id));
-   await dispatch(getUserProfile(params.id));
-   await dispatch(loadUser());
-   await dispatch(getMyPostss())
-   await dispatch(getFollowingPosts())
-   await dispatch(getAllUsers())
+    dispatch(getUserPost(params.id));
+    dispatch(getUserProfile(params.id));
+    dispatch(loadUser());
+    dispatch(getMyPostss())
+    dispatch(getFollowingPosts())
+    dispatch(getAllUsers())
 
   };
 
