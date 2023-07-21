@@ -8,6 +8,9 @@ import { useParams } from "react-router-dom";
 import User from "./User";
 import {
   followUnfollowUser,
+  getAllUsers,
+  getFollowingPosts,
+  getMyPostss,
   getUserPost,
   getUserProfile,
   loadUser,
@@ -53,7 +56,6 @@ const UserProfile = () => {
   useEffect(() => {
     dispatch(getUserPost(params.id));
     dispatch(getUserProfile(params.id));
-
   }, [dispatch, params.id]);
 
   useEffect(() => {
@@ -61,15 +63,14 @@ const UserProfile = () => {
       setMyProfile(true);
     }
 
-    if(user){
-      user.followers.forEach((item)=>{
-        if(item._id===me._id){
-          setFollowing(true)
-        }
-        else(setFollowing(false))
-      })
+    if (user) {
+      user.followers.forEach((item) => {
+        if (item._id === me._id) {
+          setFollowing(true);
+        } else setFollowing(false);
+      });
     }
-  }, [user,me._id, params.id]);
+  }, [user, me._id, params.id]);
 
   useEffect(() => {
     if (followError) {
@@ -93,9 +94,13 @@ const UserProfile = () => {
   const followHandler = async () => {
     setFollowing(!following);
     await dispatch(followUnfollowUser(user._id));
-    dispatch(getUserProfile(params.id));
-    dispatch(loadUser());
-    dispatch(getUserPost(params.id))
+   await dispatch(getUserPost(params.id));
+   await dispatch(getUserProfile(params.id));
+   await dispatch(loadUser());
+   await dispatch(getMyPostss())
+   await dispatch(getFollowingPosts())
+   await dispatch(getAllUsers())
+
   };
 
   return loading === true || userLoading === true ? (
@@ -188,7 +193,7 @@ const UserProfile = () => {
               ) : (
                 <Typography variant="h6" style={{ margin: "3vmax" }}>
                   {" "}
-                0 followers 
+                  0 followers
                 </Typography>
               )}
             </div>
@@ -219,7 +224,7 @@ const UserProfile = () => {
               ) : (
                 <Typography variant="h6" style={{ margin: "3vmax" }}>
                   {" "}
-                  0 followings 
+                  0 followings
                 </Typography>
               )}
             </div>
