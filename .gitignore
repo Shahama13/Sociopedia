@@ -1,6 +1,7 @@
 
 /node_modules
 /config/config.env
+/README.md
 
 /frontend/node_modules
 /frontend/.pnp
