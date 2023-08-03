@@ -18,8 +18,6 @@ const CommentCard = ({
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const deleteCommentHandler = async () => {
-    await console.log(postId);
-    await console.log(commentId);
     await dispatch(deleteCommentOnPost(postId, commentId));
     dispatch(getLikesOfPosts(postId));
   };

@@ -43,7 +43,6 @@ const NewPost = () => {
 
     Reader.onload = (e) => {
       if (Reader.readyState === 2) {
-        // console.log(Reader.result)
         setImage(Reader.result);
       }
     };

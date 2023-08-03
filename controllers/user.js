@@ -178,15 +178,13 @@ export const updateProfile = async (req, res) => {
     }
 }
 
-// BUG HERE
+
 export const deleteMyProfile = async (req, res) => {
     try {
 
         const user = await User.findById(req.user._id)
-        console.log(user)
         const posts = user.posts
         const userid = user._id;
-        console.log("UserID:", userid);
 
         await cloudinary.v2.uploader.destroy(user.avatar.public_id);
 
@@ -199,35 +197,27 @@ export const deleteMyProfile = async (req, res) => {
         })
 
         const allUser = await User.find()
-        console.log(allUser)
         for (let i = 0; i < allUser.length; i++) {
             const user = await User.findById(allUser[i]._id);
-            console.log("here")
             // Remove userid from followers array
             user.followers = await user.followers.filter(follower => follower.toString() !== userid.toString());
-            console.log("here2")
 
             // Remove userid from following array
             user.following = await user.following.filter(following => following.toString() !== userid.toString());
-            console.log("here3")
 
             await user.save();
         }
 
 
         const allpost = await Post.find();
-        console.log(allpost)
         for (let i = 0; i < allpost.length; i++) {
             const post = await Post.findById(allpost[i]._id);
-            console.log("Post ID:", post._id);
 
             // Remove comments with matching userid
             post.comments = await post.comments.filter(comment => comment.user.toString() !== userid.toString());
-            console.log("Filtered comments:", post.comments);
 
             // Remove likes with matching userid
             post.likes = await post.likes.filter(like => like.toString() !== userid.toString());
-            console.log("Filtered likes:", post.likes);
 
             await post.save();
         }
@@ -236,10 +226,7 @@ export const deleteMyProfile = async (req, res) => {
         // deleting user Post
         for (let i = 0; i < posts.length; i++) {
             const post = await Post.findById(posts[i])
-            console.log("here4")
             await cloudinary.v2.uploader.destroy(post.image.public_id)
-
-            console.log("here5")
             await post.deleteOne()
         }
 
